@@ -1,9 +1,13 @@
+import java.util.List;
+
 public class BurnDataStream implements BurnStream {
     // these are the series of burns made each 10 secs by the lander.
     // change them to see if you can get the lander to make a soft landing.
     // burns are between 0 and 200. This burn array usually crashes.
 
-    int burnArray[] = {100, 100, 200, 200, 100, 100, 0, 0, 200, 100, 100, 0, 0, 0, 0};
+   int burnArray[] = {0, 0, 25, 50, 100, 200, 50, 50, 100, 100, 100, 100, 0, 0, 0};
+   //int burnArray[] = {0, 0, 0, 0, 0};
+
     int burnIdx = -1;
 
     public BurnDataStream() { }

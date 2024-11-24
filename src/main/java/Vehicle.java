@@ -2,9 +2,12 @@ public class Vehicle {
 
     public Vehicle(int InitialAltitude) {
         // initialize the altitude AND previous altitude to initialAltitude
+        Altitude = InitialAltitude;
+        PrevAltitude = InitialAltitude;
+
     }
 
-    int Gravity = 100;
+        int Gravity = 100;
     /* The rate in which the spaceship descents in free fall (in ten seconds) */
 
     // Various end-of-game messages and status result codes.
@@ -53,31 +56,60 @@ public class Vehicle {
     }
 
     public int computeDeltaV() {
-        // return velocity + gravity - burn amount
-        return 0;
+       // float gravity;
+        this.Velocity = (this.Velocity + this.Gravity - this.Burn);
+        return this.Velocity;
     }
 
     public void adjustForBurn(int burnAmount) {
         // set burn to burnamount requested
+        this.Burn = burnAmount;
         // save previousAltitude with current Altitude
+        this.PrevAltitude = Altitude;
         // set new velocity to result of computeDeltaV function.
-        // subtract speed from Altitude
-        // subtract burn amount fuel used from tank
+        this.Velocity = computeDeltaV();
+        // subtract speed from Altitude ...........???????
+           Altitude = Altitude - Velocity;
+        // subtract burn amount fuel used from tank..........??????
+            Fuel = Fuel - Burn;
+
+
+
     }
 
     public boolean stillFlying() {
         // return true if altitude is positive
+        if(this.Altitude >0){
+            return true;
+        }
         return false;
     }
     public boolean outOfFuel() {
         // return true if fuel is less than or equal to zero
-        return true;
+       if(this.Fuel<=0) {
+           return true;
+       }
+       else{
+           return false;
+       }
     }
 
     public DescentEvent getStatus(int tick) {
         // create a return a new DescentEvent object
         // filled in with the state of the vehicle.
-        return null;
+        DescentEvent event = new DescentEvent(1,2,100,300,1);
+        return event;
+
+
+
+        // create a new Simulation object with a random starting altitude
+        // create a new BurnInputStream
+        // pass the new BurnInputStream to the runSimulation method
+
+//        Simulation game = new Simulation(new Vehicle(Simulation.randomaltitude()));
+//        BurnStream burnSource = new BurnInputStream();
+//        game.runSimulation(burnSource);
+
     }
 
 }
